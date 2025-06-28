@@ -120,3 +120,19 @@ body {
     max-width: 100%;
   }
 }
+
+#boton-select-img {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 123, 255, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+#boton-select-img:hover {
+  background-color: #0056b3;
+}
