@@ -1,0 +1,122 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+  background-color: #f9fafb;
+}
+
+/* Contenedor principal */
+body {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+#new_post_window_header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+#new_post_title {
+  font-size: 2rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* Formulario */
+#post_characteristics {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Labels */
+#post_characteristics label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+/* Inputs y textarea */
+#post_characteristics input[type="text"],
+#post_characteristics textarea,
+#post_characteristics input[type="file"] {
+  padding: 0.6rem 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+#post_characteristics input[type="text"]:focus,
+#post_characteristics textarea:focus,
+#post_characteristics input[type="file"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Textarea auto-expand no va con solo CSS pero esto ayuda */
+#post_characteristics textarea {
+  min-height: 100px;
+  max-height: 300px;
+}
+
+/* Botón guardar */
+#post_characteristics button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  font-weight: 700;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#post_characteristics button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Botón cancelar */
+#cancel_button {
+  margin-top: 1.5rem;
+  background-color: #dc3545;
+  color: white;
+  font-weight: 700;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 600px;
+}
+
+#cancel_button:hover {
+  background-color: #a52a2a;
+}
+
+/* Responsive: formulario centrado y con padding */
+@media (max-width: 600px) {
+  #post_characteristics {
+    padding: 1.5rem 1rem;
+    max-width: 100%;
+  }
+
+  #cancel_button {
+    max-width: 100%;
+  }
+}
