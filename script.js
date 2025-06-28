@@ -2,7 +2,7 @@
 const new_post_button = document.getElementById('new_post_button');
 const post_list = document.getElementById('post_list');
 
-// ir a la página para crear nueva publicación
+// ir a la página de nueva publicación
 new_post_button.addEventListener('click', () => {
   window.location.href = 'new_post.html';
 });
@@ -11,16 +11,15 @@ new_post_button.addEventListener('click', () => {
 window.addEventListener('DOMContentLoaded', () => {
   const saved_posts = JSON.parse(localStorage.getItem('posts')) || [];
 
-  // limpiar lista antes de llenarla (por si recarga)
-  post_list.innerHTML = '';
+  post_list.innerHTML = ''; // limpiar lista antes
 
   saved_posts.forEach((post, index) => {
     const li = document.createElement('li');
 
     li.innerHTML = `
       <div class="post_info">
-        <strong>Nombre Guardado:</strong> ${post.saved_title}<br>
-        <strong>Título Publicación:</strong> ${post.marketplace_title}<br>
+        <strong>Nombre:</strong> ${post.saved_title}<br>
+        <strong>Título:</strong> ${post.marketplace_title}<br>
         <strong>Precio:</strong> $${post.marketplace_price}<br>
         <strong>Descripción:</strong> ${post.marketplace_description}
       </div>
@@ -34,23 +33,27 @@ window.addEventListener('DOMContentLoaded', () => {
     post_list.appendChild(li);
   });
 
-  // agregar eventos a los botones copiado, editar y eliminar
+  // botones copiar
   document.querySelectorAll('.copy-btn').forEach(button => {
     button.addEventListener('click', (e) => {
       const index = e.target.dataset.index;
       const post = saved_posts[index];
-      const textToCopy = `
-${post.saved_title}
-${post.marketplace_title}
-$${post.marketplace_price}
-${post.marketplace_description}
-      `;
+      const textToCopy = 
+`Nombre: ${post.saved_title}
+
+Título: ${post.marketplace_title}
+
+Precio: $${post.marketplace_price}
+
+Descripción: ${post.marketplace_description}`;
+
       navigator.clipboard.writeText(textToCopy).then(() => {
         alert('¡Texto copiado al portapapeles!');
       });
     });
   });
 
+  // botón editar
   document.querySelectorAll('.edit-btn').forEach(button => {
     button.addEventListener('click', (e) => {
       const index = e.target.dataset.index;
@@ -59,12 +62,13 @@ ${post.marketplace_description}
     });
   });
 
+  // botón eliminar
   document.querySelectorAll('.delete-btn').forEach(button => {
     button.addEventListener('click', (e) => {
       const index = e.target.dataset.index;
-      saved_posts.splice(index, 1); // eliminar del array
+      saved_posts.splice(index, 1);
       localStorage.setItem('posts', JSON.stringify(saved_posts));
-      location.reload(); // recargar para actualizar lista
+      location.reload();
     });
   });
 });
