@@ -1,74 +1,66 @@
-// obtener referencias
-const new_post_button = document.getElementById('new_post_button');
-const post_list = document.getElementById('post_list');
+// referencias
+const newPostBtn = document.getElementById('new_post_button');
+const postList = document.getElementById('post_list');
 
-// ir a la página de nueva publicación
-new_post_button.addEventListener('click', () => {
+// Abrir página para nueva publicación
+newPostBtn.addEventListener('click', () => {
   window.location.href = 'new_post.html';
 });
 
-// cargar y mostrar publicaciones guardadas al cargar la página
+// Mostrar publicaciones guardadas al cargar la página
 window.addEventListener('DOMContentLoaded', () => {
-  const saved_posts = JSON.parse(localStorage.getItem('posts')) || [];
+  const posts = JSON.parse(localStorage.getItem('posts')) || [];
+  postList.innerHTML = '';
 
-  post_list.innerHTML = ''; // limpiar lista antes
-
-  saved_posts.forEach((post, index) => {
+  posts.forEach((post, index) => {
     const li = document.createElement('li');
 
+    // Contenido con formato correcto
     li.innerHTML = `
-      <div class="post_info">
-        <strong>Nombre:</strong> ${post.saved_title}<br>
-        <strong>Título:</strong> ${post.marketplace_title}<br>
-        <strong>Precio:</strong> $${post.marketplace_price}<br>
-        <strong>Descripción:</strong> ${post.marketplace_description}
-      </div>
-      <div class="post_buttons">
-        <button class="copy-btn" data-index="${index}">Copiar</button>
-        <button class="edit-btn" data-index="${index}">Editar</button>
-        <button class="delete-btn" data-index="${index}">Eliminar</button>
-      </div>
+      <p><strong>Nombre:</strong> ${post.saved_title}</p>
+      <p><strong>Precio:</strong> <em style="color:#007bff;">$${post.marketplace_price}</em></p>
+      <p><strong>Descripción:</strong> ${post.marketplace_description}</p>
     `;
 
-    post_list.appendChild(li);
-  });
+    // Contenedor botones
+    const buttonsDiv = document.createElement('div');
+    buttonsDiv.classList.add('buttons');
 
-  // botones copiar
-  document.querySelectorAll('.copy-btn').forEach(button => {
-    button.addEventListener('click', (e) => {
-      const index = e.target.dataset.index;
-      const post = saved_posts[index];
-      const textToCopy = 
-`Nombre: ${post.saved_title}
-
-Título: ${post.marketplace_title}
-
-Precio: $${post.marketplace_price}
-
-Descripción: ${post.marketplace_description}`;
-
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        alert('¡Texto copiado al portapapeles!');
-      });
+    // Botón Copiar
+    const copyBtn = document.createElement('button');
+    copyBtn.textContent = 'Copiar';
+    copyBtn.addEventListener('click', () => {
+      const text = 
+        `Nombre: ${post.saved_title}\n\n` +
+        `Precio: $${post.marketplace_price}\n\n` +
+        `Descripción: ${post.marketplace_description}`;
+      navigator.clipboard.writeText(text)
+        .then(() => alert('Texto copiado al portapapeles'))
+        .catch(() => alert('Error copiando al portapapeles'));
     });
-  });
+    buttonsDiv.appendChild(copyBtn);
 
-  // botón editar
-  document.querySelectorAll('.edit-btn').forEach(button => {
-    button.addEventListener('click', (e) => {
-      const index = e.target.dataset.index;
-      localStorage.setItem('edit_post_index', index);
-      window.location.href = 'new_post.html';
+    // Botón Editar
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Editar';
+    editBtn.addEventListener('click', () => {
+      window.location.href = `new_post.html?edit=${index}`;
     });
-  });
+    buttonsDiv.appendChild(editBtn);
 
-  // botón eliminar
-  document.querySelectorAll('.delete-btn').forEach(button => {
-    button.addEventListener('click', (e) => {
-      const index = e.target.dataset.index;
-      saved_posts.splice(index, 1);
-      localStorage.setItem('posts', JSON.stringify(saved_posts));
-      location.reload();
+    // Botón Eliminar
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Eliminar';
+    deleteBtn.addEventListener('click', () => {
+      if (confirm('¿Querés eliminar esta publicación?')) {
+        posts.splice(index, 1);
+        localStorage.setItem('posts', JSON.stringify(posts));
+        window.location.reload();
+      }
     });
+    buttonsDiv.appendChild(deleteBtn);
+
+    li.appendChild(buttonsDiv);
+    postList.appendChild(li);
   });
 });
