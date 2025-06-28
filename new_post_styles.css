@@ -8,27 +8,28 @@
   background-color: #f9fafb;
 }
 
-/* Contenedor principal */
+/* Body centrado */
 body {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 2rem;
   min-height: 100vh;
 }
 
-#new_post_window_header {
-  margin-bottom: 1.5rem;
-  text-align: center;
+/* Header */
+header {
+  margin-bottom: 2rem;
 }
 
-#new_post_title {
+header h1 {
   font-size: 2rem;
   color: #333;
   font-weight: 700;
 }
 
 /* Formulario */
-#post_characteristics {
+form#post_characteristics {
   background: white;
   padding: 2rem;
   border-radius: 12px;
@@ -41,16 +42,14 @@ body {
 }
 
 /* Labels */
-#post_characteristics label {
+form#post_characteristics label {
   font-weight: 600;
-  margin-bottom: 0.3rem;
   color: #555;
 }
 
 /* Inputs y textarea */
-#post_characteristics input[type="text"],
-#post_characteristics textarea,
-#post_characteristics input[type="file"] {
+form#post_characteristics input[type="text"],
+form#post_characteristics textarea {
   padding: 0.6rem 1rem;
   border: 2px solid #ccc;
   border-radius: 8px;
@@ -59,21 +58,19 @@ body {
   resize: vertical;
 }
 
-#post_characteristics input[type="text"]:focus,
-#post_characteristics textarea:focus,
-#post_characteristics input[type="file"]:focus {
+form#post_characteristics input[type="text"]:focus,
+form#post_characteristics textarea:focus {
   border-color: #007bff;
   outline: none;
 }
 
-/* Textarea auto-expand no va con solo CSS pero esto ayuda */
-#post_characteristics textarea {
+form#post_characteristics textarea {
   min-height: 100px;
   max-height: 300px;
 }
 
-/* Botón guardar */
-#post_characteristics button[type="submit"] {
+/* Botones primarios */
+.btn-primario {
   background-color: #007bff;
   color: white;
   font-weight: 700;
@@ -83,15 +80,15 @@ body {
   font-size: 1.1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  user-select: none;
 }
 
-#post_characteristics button[type="submit"]:hover {
+.btn-primario:hover {
   background-color: #0056b3;
 }
 
-/* Botón cancelar */
-#cancel_button {
-  margin-top: 1.5rem;
+/* Botón secundario cancelar */
+.btn-secundario {
   background-color: #dc3545;
   color: white;
   font-weight: 700;
@@ -103,36 +100,22 @@ body {
   transition: background-color 0.3s ease;
   width: 100%;
   max-width: 600px;
+  margin-top: 1.5rem;
+  user-select: none;
 }
 
-#cancel_button:hover {
+.btn-secundario:hover {
   background-color: #a52a2a;
 }
 
-/* Responsive: formulario centrado y con padding */
+/* Responsive para móviles */
 @media (max-width: 600px) {
-  #post_characteristics {
+  form#post_characteristics {
     padding: 1.5rem 1rem;
     max-width: 100%;
   }
 
-  #cancel_button {
+  .btn-secundario {
     max-width: 100%;
   }
-}
-
-#boton-select-img {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 3px 8px rgba(0, 123, 255, 0.5);
-  transition: background-color 0.3s ease;
-}
-
-#boton-select-img:hover {
-  background-color: #0056b3;
 }

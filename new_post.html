@@ -2,56 +2,37 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nueva Publicación</title>
   <link rel="stylesheet" href="new_post_styles.css" />
 </head>
 <body>
-  <div class="form_container">
 
-    <!-- Título de la ventana -->
-    <header id="new_post_header">
-      <h1>Nueva Publicación</h1>
-    </header>
+  <header>
+    <h1>Nueva Publicación</h1>
+  </header>
 
-    <!-- Formulario de publicación -->
-    <form id="post_characteristics" autocomplete="off">
+  <form id="post_characteristics" autocomplete="off">
+    <label for="saved_title">Nombre de Guardado</label>
+    <input type="text" id="saved_title" name="saved_title" required placeholder="Nombre del guardado" />
 
-      <!-- Título interno para guardar -->
-      <label for="saved_title">Nombre Guardado</label><br />
-      <input type="text" id="saved_title" name="saved_title" placeholder="Ej: Lavadora Blanca" required /><br /><br />
+    <label for="marketplace_title">Nombre de la Publicación</label>
+    <input type="text" id="marketplace_title" name="marketplace_title" required placeholder="Nombre" />
 
-      <!-- Título para Marketplace -->
-      <label for="marketplace_title">Título para la Publicación</label><br />
-      <input type="text" id="marketplace_title" name="marketplace_title" placeholder="Ej: Lavadora Samsung 10kg" required /><br /><br />
+    <label for="marketplace_price">Precio de la Publicación</label>
+    <input type="text" id="marketplace_price" name="marketplace_price" required placeholder="Precio" />
 
-      <!-- Precio -->
-      <label for="marketplace_price">Precio</label><br />
-      <input type="text" id="marketplace_price" name="marketplace_price" placeholder="Ej: 250" required /><br /><br />
+    <label for="marketplace_description">Descripción de la Publicación</label>
+    <textarea id="marketplace_description" name="marketplace_description" rows="4" required placeholder="Descripción"></textarea>
 
-      <!-- Descripción -->
-      <label for="marketplace_description">Descripción</label><br />
-      <textarea
-        id="marketplace_description"
-        name="marketplace_description"
-        rows="4"
-        placeholder="Ej: Lavadora en excelente estado, poco uso..."
-        required
-      ></textarea><br /><br />
+    <input type="file" id="marketplace_images" name="marketplace_images" accept="image/*" multiple style="display:none" />
+    <button type="button" id="btn_select_images" class="btn-primario">Seleccionar imágenes</button>
 
-      <!-- Imágenes -->
-      <label for="marketplace_images">Imágenes (opcional)</label><br />
-      <input type="file" id="marketplace_images" name="marketplace_images" accept="image/*" multiple /><br /><br />
+    <button type="submit" class="btn-primario">Guardar publicación</button>
+  </form>
 
-      <!-- Botones de acción -->
-      <button type="submit" id="save_button">Guardar Publicación</button>
-      <button type="button" id="cancel_button">Cancelar</button>
+  <button id="cancel_button" class="btn-secundario">Cancelar</button>
 
-    </form>
-
-  </div>
-
-  <!-- Script -->
   <script src="new_post_script.js"></script>
 </body>
 </html>
